@@ -1,70 +1,48 @@
-export const StepTwo = (props) => {
-  const { currentIndex, setCurrentIndex } = props;
+export const StepTwo = ({ errors }) => {
   return (
-    <div className=" flex justify-center mt-80">
-      <div className="w-[480px] h-[655px] flex flex-col p-[32px] shadow-2xl rounded-[8px]">
-        <div className="flex flex-col gap-2">
-          <img
-            className="w-[60px] h-[60px]"
-            src="https://pinecone-academy-multi-step-form.vercel.app/pinecone-logo.svg"
-            alt=""
-          />
-          <h3 className="text-2xl font-[550]">Join Us! 😎</h3>
-          <p className="text-gray-400">
-            Please provide all current information accurately.
-          </p>
-        </div>
-        <form className="flex flex-col gap-2 mt-5" action="">
+    <div className=" flex justify-center">
+      <div className="w-full flex flex-col  rounded-[8px]">
+        <div className="flex flex-col gap-2 mt-5">
           <label htmlFor="mail" className="flex gap-1 font-bold">
             Email <p className="text-red-500">*</p>
           </label>
           <input
+            name="mail"
             id="mail"
-            type="text"
+            type="email"
             className="w-full h-10 border-[1px] px-2 rounded-md border-gray-300"
           />
+          {errors?.mail && <p className="text-red-500">{errors.mail}</p>}
           <label htmlFor="number" className="flex gap-1 font-bold">
             Phone number <p className="text-red-500">*</p>
           </label>
           <input
+            name="number"
             id="number"
             type="text"
             className="w-full h-10 border-[1px] px-2 rounded-md border-gray-300"
           />
+          {errors?.number && <p className="text-red-500">{errors.number}</p>}
           <label htmlFor="pass" className="flex gap-1 font-bold">
             Password <p className="text-red-500">*</p>
           </label>
           <input
+            name="pass"
             id="pass"
             type="password"
             className="w-full h-10 border-[1px] px-2 rounded-md border-gray-300"
           />
+          {errors?.pass && <p className="text-red-500">{errors.pass}</p>}
           <label htmlFor="cpass" className="flex gap-1 font-bold">
             Confirm Password <p className="text-red-500">*</p>
           </label>
           <input
+            name="cpass"
             id="cpass"
             type="password"
             className="w-full h-10 border-[1px] px-2 rounded-md border-gray-300"
           />
-        </form>
-        <div className="flex justify-center gap-4 mt-10">
-          <button
-            onClick={() => {
-              setCurrentIndex(currentIndex - 1);
-            }}
-            className="px-4 py-2 rounded-[10px] border-1 text-black cursor-pointer"
-          >
-            Back
-          </button>
-          <button
-            onClick={() => {
-              setCurrentIndex(currentIndex + 1);
-            }}
-            className="px-6 py-2 rounded-[10px] bg-gray-800 text-white cursor-pointer"
-          >
-            Continue 2/3 {`>`}
-          </button>
+          {errors?.cpass && <p className="text-red-500">{errors.cpass}</p>}
         </div>
       </div>
     </div>
