@@ -4,11 +4,22 @@ import { StepTwo } from "./_components/StepTwo";
 import { StepThree } from "./_components/StepThree";
 import { Allset } from "./_components/Allset";
 import { Button } from "./_components/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [errors, setErrors] = useState({});
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    const saved = localStorage.getItem("data");
+    if (saved) {
+      setData((saved));
+    }
+  }, []);
+  useEffect(() => {
+    localStorage.setItem("data",(data));
+  }, [data]);
 
   const validate = (data) => {
     const errors = {};
@@ -45,6 +56,9 @@ export default function Home() {
       if (!cpass) {
         errors.cpass = "Password is required";
       }
+      if (pass && cpass && pass !== cpass) {
+        errors.cpass = "Password not match";
+      }
     }
     if (currentIndex === 2) {
       const date = data.get("date");
@@ -77,7 +91,7 @@ export default function Home() {
 
   return (
     <div className="flex justify-center mt-50">
-      <div className="flex flex-col w-[480px] h-[655px] p-[32px] rounded-md shadow-2xl">
+      <div className="flex flex-col w-[480px] h-fit p-[32px] rounded-md shadow-2xl">
         <div className="flex flex-col gap-2">
           <img
             className="w-[60px]"
@@ -89,14 +103,30 @@ export default function Home() {
           </p>
         </div>
 
-        <form className="flex flex-col" onSubmit={handleSubmit}>
-          <CurrentStep errors={errors} />
-          <button
-            type="submit"
-            className="w-full py-2 rounded-[6px] bg-gray-800 text-white cursor-pointer mt-20 "
-          >
-            Continue {currentIndex + 1}/3 {">"}
-          </button>
+        <form className="flex flex-col justify-between" onSubmit={handleSubmit}>
+          <CurrentStep
+            setData={setData}
+            setErrors={setErrors}
+            errors={errors}
+          />
+          <div className="flex gap-4">
+            {currentIndex > 0 && (
+              <button
+                type="button"
+                onClick={() => setCurrentIndex(currentIndex - 1)}
+                className="py-2 px-8 border-[1px] border-gray-400 cursor-pointer rounded-md mt-5 bg-gray-200"
+              >
+                Back
+              </button>
+            )}
+
+            <button
+              type="submit"
+              className="w-full py-2 rounded-md bg-gray-800 text-white cursor-pointer mt-5 "
+            >
+              Continue {currentIndex + 1}/3 {">"}
+            </button>
+          </div>
         </form>
       </div>
     </div>
