@@ -11,7 +11,7 @@ export const Allset = () => {
           <p className="text-gray-400">
             We've received yout submission. Thank you!
           </p>
-        </div>
+        </div>  
       </div>
     </div>
   );
