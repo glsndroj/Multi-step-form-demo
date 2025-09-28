@@ -106,7 +106,7 @@ export const StepOne = ({
           </div>
           <button
             type="submit"
-            className="w-full py-2 rounded-md bg-gray-800 text-white cursor-pointer mt-5 "
+            className="w-full py-2 rounded-md bg-gray-800 text-white cursor-pointer mt-5 hover:opacity-80 "
           >
             Continue {currentIndex + 1}/3 {">"}
           </button>

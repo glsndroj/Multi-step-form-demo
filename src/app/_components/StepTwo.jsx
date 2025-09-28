@@ -23,7 +23,10 @@ export const StepTwo = ({
       }
       if (!pass) {
         errors.pass = "Password is required";
+      } else if (pass.length < 6) {
+        errors.pass = "Password must be at least 6 characters";
       }
+
       if (!cpass) {
         errors.cpass = "Password is required";
       }
@@ -137,7 +140,7 @@ export const StepTwo = ({
               <button
                 type="button"
                 onClick={() => setCurrentIndex(currentIndex - 1)}
-                className="py-2 px-8 border-[1px] border-gray-400 cursor-pointer rounded-md mt-5 bg-gray-200"
+                className="py-2 px-8 border-[1px] border-gray-400 cursor-pointer rounded-md mt-5 bg-gray-200 hover:bg-gray-100"
               >
                 Back
               </button>
@@ -145,7 +148,7 @@ export const StepTwo = ({
 
             <button
               type="submit"
-              className="w-full py-2 rounded-md bg-gray-800 text-white cursor-pointer mt-5 "
+              className="w-full py-2 rounded-md bg-gray-800 text-white cursor-pointer mt-5 hover:opacity-80 "
             >
               Continue {currentIndex + 1}/3 {">"}
             </button>
